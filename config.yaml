@@ -1,0 +1,49 @@
+# Project Configuration
+
+paths:
+  data_dir: "archive"
+  output_dir: "results"
+  models_dir: "models"
+  log_file: "results/pipeline.log"
+
+data:
+  # To avoid memory issues during initial dev, limits the number of files to process if set
+  max_files: 2
+  # The dataset split ratio (e.g. 0.8 means 80% files for training, 20% for testing)
+  train_split: 0.8
+  split_strategy: "row" # 'file' or 'row'
+  target_col: "label"
+
+features:
+  numerical:
+    - "dur"
+    - "tot_pkts"
+    - "tot_bytes"
+    - "src_bytes"
+  categorical:
+    - "proto"
+    - "state"
+    - "dir"
+  drop:
+    - "family"  # We drop family for binary classification (Botnet vs Normal)
+
+preprocessing:
+  imbalance_strategy: "class_weight" # 'smote', 'class_weight', or 'none'
+
+training:
+  random_state: 42
+  cv_folds: 3
+  # Whether to optimize hyperparams
+  optimize: false
+  # MLflow tracking URI
+  mlflow_tracking_uri: "sqlite:///mlflow.db"
+  models_to_train:
+    - "RandomForest"
+    #- "GradientBoosting"
+    - "LogisticRegression"
+    #- "XGBoost"
+    #- "IsolationForest" # Anomaly detection
+
+evaluation:
+  plot_shap: true
+  export_csv: true
