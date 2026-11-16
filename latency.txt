@@ -1,0 +1,2 @@
+Single prediction time: 0.000271 seconds
+Batch (1000) prediction time: 0.000422 seconds

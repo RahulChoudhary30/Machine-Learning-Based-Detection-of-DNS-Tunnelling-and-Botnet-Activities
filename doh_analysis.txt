@@ -1,0 +1,4 @@
+DoH (DNS over HTTPS) Analysis:
+DoH encapsulates DNS queries inside HTTPS, bypassing traditional port 53 monitoring.
+Our model focuses on network flow behaviors (timing, packet sizes, flow durations) rather than deep packet inspection.
+Therefore, the statistical signatures of botnet beacons and DNS tunnels remain detectable even when the payload is encrypted via DoH.
